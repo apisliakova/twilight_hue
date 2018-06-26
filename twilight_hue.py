@@ -1,4 +1,3 @@
-import pdb
 import requests
 import json
 import datetime
@@ -19,7 +18,6 @@ def hue(brightness):
     body['sat'] = 25
     body['bri'] = brightness
     body = json.dumps(body)
-    # pdb.set_trace()
     response = requests.put(url, data=body)
 
 
@@ -27,8 +25,6 @@ def hue(brightness):
 latitude = "37.367931"
 longitude = "-121.914402"   
 url = "https://api.sunrise-sunset.org/json?lat=%s&lng=%s&formatted=0" % (latitude, longitude)
-
-# url = "http://10.0.0.200/api/0DgsyolfyHyIvFzWDtLp4Sj4yeEvLFdhQ2VtISzj/lights"
 
 
 # This code will send a GET request and store its response into response variable as a response data type
@@ -45,7 +41,6 @@ twilight_end = datetime.datetime.strptime(twilight_end[:-6], "%Y-%m-%dT%H:%M:%S"
 twilight_duration = (twilight_end - twilight_start).seconds
 pdt_twilight_start = twilight_start - datetime.timedelta(hours=7)
 
-# pdb.set_trace()
 
 while (pdt_twilight_start - datetime.datetime.today()).seconds > 1:
 	print (pdt_twilight_start - datetime.datetime.today()).seconds
@@ -55,11 +50,4 @@ while (pdt_twilight_start - datetime.datetime.today()).seconds > 1:
 for brightness in range(1, 256):
 	hue(brightness)
 	time.sleep(twilight_duration / 255)
-
-# print response["1"]["name"]
-# print response["2"]["config"]["function"]
-# print response["9"]["capabilities"]["control"]["colorgamut"][1][1]
-
-
-
 
