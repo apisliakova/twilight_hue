@@ -21,10 +21,14 @@ def hue(brightness):
     response = requests.put(url, data=body)
 
 
+def get_location_by_ip():
+    url = "http://ip-api.com/json"
+    response = requests.get(url)
+    response = json.loads(response.text)
+    return response["lat"], response["lon"]
 
-latitude = "37.367931"
-longitude = "-121.914402"   
-url = "https://api.sunrise-sunset.org/json?lat=%s&lng=%s&formatted=0" % (latitude, longitude)
+  
+url = "https://api.sunrise-sunset.org/json?lat=%s&lng=%s&formatted=0" % (get_location_by_ip())
 
 
 # This code will send a GET request and store its response into response variable as a response data type
